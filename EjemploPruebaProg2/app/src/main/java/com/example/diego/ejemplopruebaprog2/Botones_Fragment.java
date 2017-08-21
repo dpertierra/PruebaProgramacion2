@@ -33,7 +33,6 @@ public class Botones_Fragment extends Fragment {
     SQLiteDatabase db;
     EditText text;
     String NombrePelicula;
-    ArrayList<String> ListaPeliculas;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle datosrecibidos) {
         View VistaaDevolver = inflater.inflate(R.layout.botones_layout, container, false);
@@ -110,7 +109,7 @@ public class Botones_Fragment extends Fragment {
                     Toast.makeText(getContext(), "La pelicula esta en la base de datos", Toast.LENGTH_LONG).show();
 
                 }
-            }while (ConjuntoRegistros.moveToNext()==true);
+            }while (ConjuntoRegistros.moveToNext());
         }
         }
         db.close();

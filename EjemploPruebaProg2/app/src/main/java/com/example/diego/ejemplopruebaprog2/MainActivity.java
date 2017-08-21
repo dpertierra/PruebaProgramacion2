@@ -18,9 +18,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     FragmentManager manager;
     FragmentTransaction transaction;
-    BasePruebaSQLiteHelper acceso;
-    SQLiteDatabase db;
-    ArrayList<String> ListaPeliculas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,5 +37,14 @@ public class MainActivity extends AppCompatActivity {
         transaction = manager.beginTransaction();
         transaction.replace(R.id.holder, Lista);
         transaction.commit();
+    }
+    public void ChangetoBotones()
+    {
+        manager = getSupportFragmentManager();
+        Fragment Botones = new Botones_Fragment();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.holder, Botones);
+        transaction.commit();
+
     }
 }

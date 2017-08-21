@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Fragment_Lista extends Fragment {
     BasePruebaSQLiteHelper acceso;
     SQLiteDatabase db;
     MainActivity activity;
-    ArrayList<String> ListaPeliculas;
+    Button btnvolver;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.lista_layout,container,false);
         acceso = new BasePruebaSQLiteHelper(getContext(), "basePrueba", null, 1);
@@ -28,6 +29,14 @@ public class Fragment_Lista extends Fragment {
         ArrayList<String>Pelis = mostrarPeliculas();
         Adapter_Peliculas adapterPeliculas= new Adapter_Peliculas(Pelis, getContext());
         listView.setAdapter(adapterPeliculas);
+        activity = (MainActivity)getActivity();
+        btnvolver = (Button)vista.findViewById(R.id.btnvolver);
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.ChangetoBotones();
+            }
+        });
         return vista;
     }
     boolean connectToDatabase() {
