@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="com.example.a42025177.pruebaprog2tdiegopertierra.Datos">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt"
+        android:textSize="25sp"
+        android:hint="Ingrese un nombre"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt"
+        android:text="Agregar"
+        android:textSize="25sp"
+        android:onClick="Agregar"
+        android:id="@+id/btnAgregar"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAgregar"
+        android:text="Volver"
+        android:textSize="25sp"
+        android:onClick="Volver"
+        />
+
+</RelativeLayout>
