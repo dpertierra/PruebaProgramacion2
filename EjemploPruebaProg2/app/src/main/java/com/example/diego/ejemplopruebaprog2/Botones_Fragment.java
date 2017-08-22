@@ -33,12 +33,18 @@ public class Botones_Fragment extends Fragment {
     SQLiteDatabase db;
     EditText text;
     String NombrePelicula;
+    ListView listView;
+    ArrayList<String>Pelis;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle datosrecibidos) {
         View VistaaDevolver = inflater.inflate(R.layout.botones_layout, container, false);
         acceso = new BasePruebaSQLiteHelper(getContext(), "basePrueba", null, 1);
         activity = (MainActivity)getActivity();
         text = (EditText)VistaaDevolver.findViewById(R.id.edt);
+        listView = (ListView)VistaaDevolver.findViewById(R.id.listview);
+        Pelis = mostrarPeliculas();
+        Adapter_Peliculas adapterPeliculas= new Adapter_Peliculas(Pelis, getContext());
+        listView.setAdapter(adapterPeliculas);
         NombrePelicula = text.getText().toString();
         btnAgregar = (Button)VistaaDevolver.findViewById(R.id.btnagregar);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +95,12 @@ public class Botones_Fragment extends Fragment {
             nuevoregistro.put("Pelicula", Pelicula);
             db.insert("Peliculas", null, nuevoregistro);
             Toast.makeText(getContext(), "Se agrego " + Pelicula, Toast.LENGTH_SHORT).show();
+            Pelis = mostrarPeliculas();
             db.close();
-    }
+
+        }
+        Adapter_Peliculas adapterPeliculas= new Adapter_Peliculas(Pelis, getContext());
+        listView.setAdapter(adapterPeliculas);
     }
     public void Buscar(String Pelicula)
     {
@@ -122,6 +132,21 @@ public class Botones_Fragment extends Fragment {
             }
             db.close();
     }
+    ArrayList<String> mostrarPeliculas() {
+        ArrayList<String> Peliculas = new ArrayList<>();
+        if (connectToDatabase()) {
+            Cursor cursor = db.rawQuery("SELECT Pelicula from Peliculas ", null);
+            if (cursor.moveToFirst()) {
+                do {
+                    Peliculas.add(cursor.getString(0));
+                } while (cursor.moveToNext());
 
+
+            }
+            db.close();
+        }
+        return Peliculas;
+
+}
 }
 
